@@ -1,15 +1,32 @@
-let xBolinha = 300;
-let yBolinha = 200;
-let diametro = 15;
+let cor;
+let circuloX; // horizontal
+let circuloY; // vertical
 
-let velocidadeXBolinha = 6;
-let velocidadeYBolinha = 6;
 function setup() {
-  createCanvas(600, 400);
+  createCanvas(400, 400);
+  background(color(100, 0 , 0));
+  cor = color(random(0, 255), random(0, 255), random(0, 255));
+  
+  circuloX = [0, 0, 0];
+  circuloY = [random(height), random(height), random(height)];
 }
 
 function draw() {
-  background(0);
-  circle(xBolinha,yBolinha,diametro);
-  xBolinha += velocidadeXBolinha;
-  yBolinha += velocidadeYBolinha;
+  
+  fill(cor);
+  
+  for(let contador in circuloX) {
+    circle(circuloX[contador], circuloY[contador], 50);    
+    circuloX[contador]+= random(0,3);
+    circuloY[contador]+= random(-3,3); 
+    
+    if(circuloX[contador] >= width){
+      circuloX[contador] = 0;
+      circuloY[contador] = random(height);
+    }
+  }
+  
+  if(mouseIsPressed){
+    cor = color(random(0, 255), random(0, 255), random(0, 255), random(0, 100));
+  }
+}
